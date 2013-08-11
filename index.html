@@ -2,10 +2,43 @@
 <html>
 <head>
   <title>Flying Fox</title>
-  <link rel="stylesheet" href="public/css/style.css">
+  <link rel="stylesheet" href="public/css/style.css"/>
+  <link rel="stylesheet" href="public/css/brick.css"/>
 </head>
-  <button class="LocationButton js-get-location">Get Location</button>
-  <div class="js-status"></div>
-  <script src="public/js/scripts.js"></script>
+<body>
+	<x-flipbox class="flipbox">
+		<div class="page-1">
+			<div class="Title">
+				Flying Fox
+			</div>
+			<div class="Name">
+				<label class="Name_Text">Please enter your name:</label>
+				<input class="Name_Input" type="text"/>
+			</div>
+			<div class="Waiver">
+				<p class="Waiver_Text">
+					By clicking the 'Time to Fly!' button, you understand and agree that playing Flying Fox is entirely at my own risk. You understand and agree that the authors of Flying Fox will in no event be liable for any direct, indirect, incidental, consequential or exemplary damages or injuries.
+				</p>
+				<label class="Waiver_Agree">Agree</label>
+			</div>
+			<button class="LocationButton js-get-location" disabled>Time to Fly!</button>
+		</div>
+		<div class="page-2">
+			<div class="Loading">
+				Loading, Please Wait...
+				<img class="Loading_Gif" alt="Loading" src="public/img/ajax-loader.gif"/>
+			</div>
+			<div class="Flying" hidden>
+				Throw Me!
+				<img class="Flying_Gif" alt="Flying Pony" src="public/img/flying-dash.gif"/>
+			</div>
+			<div class="Results" hidden>
+				<button class="ReturnButton js-return">Moar!</button>
+			</div>			
+		</div>
+	</x-flipbox>
+	<div class="js-status"></div>
+	<script src="public/js/scripts.js"></script>
+	<script type="text/javascript" src="public/js/brick.js"></script>
 </body>
 </html>

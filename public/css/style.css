@@ -1,7 +1,45 @@
-.LocationButton {
+.LocationButton, .ReturnButton {
   -moz-appearance: none;
   appearance: none;
   font-size: 30px;
   width: 100%;
   height: 100px;
+  position: absolute;
+  bottom:0;
+  left:0;
+}
+
+.page-1 {
+	text-align: center;
+	font-size: 30px;
+}
+.page-1 .Title {
+	font-weight:bold;
+	font-size: 35px;
+	margin-top:20px;
+}
+.page-1 .Waiver {
+	font-size:10px;
+	padding:10px;
+}
+.page-1 .Waiver_Agree{
+	text-decoration: underline;
+	font-weight:bold;
+	font-size: 20px;
+	cursor: pointer;
+}
+.page-1 .Name_Input {
+	font-size:30px;
+	width:80%;
+	margin-top:20px;
+}
+.page-2 {
+	text-align: center;
+}
+.page-2 .Flying{
+	font-size: 30px;
+}
+.page-2 .Flying img {
+	width:100%;
+	height:100%;
 }
