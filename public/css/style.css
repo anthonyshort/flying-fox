@@ -9,6 +9,10 @@
   left:0;
 }
 
+[hidden] {
+  display: none;
+}
+
 .page-1 {
 	text-align: center;
 	font-size: 30px;
