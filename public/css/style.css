@@ -6,6 +6,10 @@
   height: 100px;
 }
 
+[hidden] {
+  display: none;
+}
+
 .page-1 {
 	text-align: center;
 	font-size: 30px;

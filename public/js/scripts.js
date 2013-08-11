@@ -1,67 +1,73 @@
-var status = document.querySelector('.js-status');
-var moving = false;
-var start;
-var stop;
-
-function page(n) {
-  document.body.classList.add('page-' + n);
-}
-
-function isMoving(motion) {
-  return true;
-}
-
-function showSuccess(start, end) {
-  document.body.classList.add('.page-success');
-
-}
-
-function showDistance() {
-
-}
-
-function distance(a_lat, a_lon, b_lat, b_lon) {
+function calculateDistance(a_lat, a_lon, b_lat, b_lon) {
   var R = 6371; // km
   return Math.acos(Math.sin(a_lat)*Math.sin(b_lat) +
                    Math.cos(a_lat)*Math.cos(b_lat) *
                    Math.cos(b_lon-a_lon)) * R;
 }
 
-document.querySelector('.js-get-location').addEventListener('click', function(event){
-  status.innerHTML = "Loading...";
-  event.preventDefault();
-
-
-  navigator.geolocation.getCurrentPosition(function(startPosition){
-
-    window.addEventListener('devicemotion', function onMotion(motion){
-      if( isMoving(motion) ) {
-        moving = true
-      }
-      else if(moving === true) {
-        navigator.geolocation.getCurrentPosition(function(endPosition){
-          stop = endPosition;
-          window.removeEventListener('devicemotion', onMotion);
-          showSuccess(startPosition, endPosition);
-        });
-      }
-    });
-
+function getLocation(fn){
+  navigator.geolocation.getCurrentPosition(function(position){
+    fn(null, position);
   }, function(err){
-    status.innerHTML = err.message;
+    fn(err);
+  },{
+    enableHighAccuracy: true
+  });
+}
+
+/**
+ * Start the throw
+ * @return {void}
+ */
+function fly(callback){
+  getLocation(function(err, startPosition){
+    if(err) return callback(err);
+
+    // --
+    document.querySelector('.Loading').setAttribute('hidden', true);
+    document.querySelector('.Flying').removeAttribute('hidden');
+    // --
+
+    setTimeout(function(){
+      getLocation(function(err, endPosition){
+        if(err) return callback(err);
+        var distance = calculateDistance(
+          startPosition.coords.latitude,
+          startPosition.coords.longitude,
+          endPosition.coords.latitude,
+          endPosition.coords.longitude
+        );
+        callback(null, distance);
+      });
+    }, 5000);
+  });
+};
+
+// ---------------
+
+var startButton = document.querySelector('.js-get-location');
+var agreeButton = document.querySelector('.Waiver_Agree');
+var tryAgainButton = document.querySelector('.ReturnButton');
+
+function flipper() {
+  document.querySelector('.flipbox').toggle();
+}
+
+agreeButton.addEventListener('click', function(){
+  startButton.removeAttribute('disabled');
+});
+
+tryAgainButton.addEventListener('click', function(){
+  flipper();
+  document.querySelector('.Results').setAttribute('hidden', true);
+});
+
+startButton.addEventListener('click', function(event){
+  flipper();
+  fly(function(err, distance){
+    document.querySelector('.js-distance').innerHTML = distance;
+    document.querySelector('.Flying').setAttribute('hidden', true);
+    document.querySelector('.Results').removeAttribute('hidden');
   });
 });
 
-
-
-/*
-
-1. Press start, log location
-2. Check accel for motion - devicemotion event
-3. Check accel for motion stop
-4. log location
-5. Get distance between locations
-6. ...
-7. Profit!
-
- */
