@@ -1,0 +1,8 @@
+{
+  "name": "Flying Fox",
+  "description": "Make your phone fly",
+  "launch_path": "/index.html",
+  "permissions": {
+    "geolocation": {}
+  }
+}

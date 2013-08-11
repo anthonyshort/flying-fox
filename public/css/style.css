@@ -1,0 +1,7 @@
+.LocationButton {
+  -moz-appearance: none;
+  appearance: none;
+  font-size: 30px;
+  width: 100%;
+  height: 100px;
+}
