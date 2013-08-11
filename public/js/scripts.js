@@ -65,7 +65,8 @@ tryAgainButton.addEventListener('click', function(){
 startButton.addEventListener('click', function(event){
   flipper();
   fly(function(err, distance){
-    document.querySelector('.js-distance').innerHTML = distance;
+    document.querySelector('.js-name').innerHTML = document.querySelector('.Name_Input').value;
+    document.querySelector('.js-distance').innerHTML = (Math.round(distance * 10000, 2)/100);
     document.querySelector('.Flying').setAttribute('hidden', true);
     document.querySelector('.Results').removeAttribute('hidden');
   });

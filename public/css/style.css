@@ -6,6 +6,12 @@
   height: 100px;
 }
 
+.ReturnButton {
+	position: absolute;
+	bottom:0;
+	left:0;
+}
+
 [hidden] {
   display: none;
 }
@@ -46,4 +52,11 @@
 .page-2 .Flying img {
 	width:100%;
 	height:100%;
+}
+.page-2 .Results {
+	font-size: 30px;
+	text-align: center;
+}
+.page-2 .Results .Distance {
+	font-size:80px;
 }
